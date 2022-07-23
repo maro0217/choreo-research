@@ -31,6 +31,8 @@ export default function BlogId({ blog }) {
             __html: `${blog.body}`,
           }}
         />
+        <p>{blog.genre}</p>
       </main>
     );
   }
+
