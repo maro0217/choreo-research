@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import {TextInput, Header, createStyles, Select } from '@mantine/core';
+import {TextInput, Header, createStyles, Select, Card, SimpleGrid, Text, useMantineTheme } from '@mantine/core';
 import { client } from '../libs/client';
 import Link from "next/link";
 import { useState } from 'react';
@@ -8,6 +8,7 @@ const useStyles = createStyles((theme) => ({
   header: {
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
+    marginBottom: 50
   },
 
   inner: {
@@ -17,9 +18,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
   },
 
-  input: {
-    width: 100
-  }
 }));
 
 
@@ -88,7 +86,7 @@ export const getStaticProps = async () => {
       }
     }
     const genre = categories.map((category) => category.name)
-
+    const theme = useMantineTheme();
   return (
     <div>
     <Header height={56} className={classes.header}>
@@ -100,28 +98,39 @@ export const getStaticProps = async () => {
                   {...form.getInputProps('name')} 
             />
         </form>
-        <form onSubmit={form.onSubmit(categorySubmit) }>
           <Select
                 data={genre}
                 searchable
                 placeholder="お探しのスタイルはどれですか？"
                 {...form.getInputProps('genre')}
-                onSearchChange={categorySubmit}
+                
           /> 
-        </form>
+
 
     </div>
     </Header>
 
-      <ul style={{listStyle:"none"}}>
+      
+    <SimpleGrid cols={3}>
         {contents().map((blog) => (
-          <li key={blog.id}>
-            <Link href={`/blog/${blog.id}`}>
-              <a className='flex'>{blog.title}, {blog.category.name}</a>
-            </Link>
-          </li>
+          <Link  key={blog.id}  href={`/blog/${blog.id}`}>
+                <Card
+                  sx={{
+                    backgroundColor: theme.colors.blue[1]
+                  }}
+                  shadow="sm"
+                  p="lg"
+                >
+                <Card.Section component="a" target="_blank">
+
+                </Card.Section>
+                <Text  weight={800} >{blog.title}</Text>
+                <a>{blog.category.name}</a>
+                </Card>
+          </Link>
         ))}
-      </ul>
+    </SimpleGrid> 
+      
     </div>
   );
 }
