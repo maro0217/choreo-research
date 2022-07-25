@@ -1,3 +1,5 @@
+import { Badge, Group, Title } from "@mantine/core";
+import Post from "../../../components/Post";
 import { client } from "../../../libs/client";
 
 export const getStaticPaths = async () => {
@@ -21,16 +23,10 @@ export const getStaticPaths = async () => {
   
 export default function BlogId({ blog }) {
     return (
-      <main>
-        <h1>{blog.title}</h1>
-        <p>{blog.publishedAt}</p>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `${blog.body}`,
-          }}
-        />
-        <p>{blog.genre}</p>
-      </main>
+      <div>
+        <Post blog={blog}/>
+      </div>
+
     );
   }
 

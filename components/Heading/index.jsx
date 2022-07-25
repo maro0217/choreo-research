@@ -48,7 +48,7 @@ export const Heading = (props) => {
               <form onSubmit={form.onSubmit(props.handleSubmit)} className={classes.SearchBox}>
                   <TextInput
                       placeholder="どんなコレオをお探しですか？" 
-                      {...form.getInputProps('name')} 
+                      {...form.getInputProps('name')}
                       icon={<Search size={18}/>}
                   />
               </form>
