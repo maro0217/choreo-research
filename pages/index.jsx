@@ -1,21 +1,32 @@
 import { useForm } from '@mantine/form';
-import {TextInput, Header, createStyles, Select, Card, SimpleGrid, Text, useMantineTheme } from '@mantine/core';
+import {TextInput, Header, createStyles, Select, Card, SimpleGrid, Text, useMantineTheme, Title } from '@mantine/core';
 import { client } from '../libs/client';
 import Link from "next/link";
 import { useState } from 'react';
+import { useViewportSize } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   header: {
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
-    marginBottom: 50
+    marginBottom: 50,
+    width: '100%'
   },
 
-  inner: {
+  headerInner: {
     height: 56,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%'
+  },
+
+  SearchBox: {
+    width: '35%'
+  },
+
+  SelectBox: {
+    width: '30%'
   },
 
 }));
@@ -92,18 +103,19 @@ export const getStaticProps = async () => {
     }
     const genre = categories.map((category) => category.name)
     const theme = useMantineTheme();
+
   return (
     <div>
     <Header height={56} className={classes.header}>
-      <div className={classes.inner}>
-        <form onSubmit={form.onSubmit(handleSubmit)}>
+      <div className={classes.headerInner}>
+        <Title order={1}>Cho<a style={{color: theme.colors.blue[3]}}>reo</a> Search</Title>
+        <form onSubmit={form.onSubmit(handleSubmit)} className={classes.SearchBox}>
             <TextInput
-                  className={classes.input} 
                   placeholder="どんなコレオをお探しですか？" 
                   {...form.getInputProps('name')} 
             />
         </form>
-        <form>
+        <form className={classes.SelectBox}>
           <Select
                 data={genre}
                 searchable
