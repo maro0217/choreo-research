@@ -2,17 +2,17 @@ import { createStyles, Header, MultiSelect, TextInput, Title, useMantineTheme } 
 import { useForm } from '@mantine/form';
 import React from 'react'
 import { Select } from '@mantine/core';
+import { Search } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme) => ({
     header: {
       paddingLeft: theme.spacing.md,
       paddingRight: theme.spacing.md,
-      marginBottom: 50,
       width: '100%'
     },
   
     headerInner: {
-      height: 56,
+      height: 70,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -42,13 +42,14 @@ export const Heading = (props) => {
 
   return (
     <div>
-        <Header height={56} className={classes.header}>
+        <Header className={classes.header}>
           <div className={classes.headerInner}>
               <Title order={1}>Cho<a style={{color: theme.colors.blue[3]}}>reo</a> Search</Title>
               <form onSubmit={form.onSubmit(props.handleSubmit)} className={classes.SearchBox}>
                   <TextInput
                       placeholder="どんなコレオをお探しですか？" 
                       {...form.getInputProps('name')} 
+                      icon={<Search size={18}/>}
                   />
               </form>
               <form className={classes.SelectBox}>

@@ -1,9 +1,12 @@
-import { Card, SimpleGrid, Text, useMantineTheme } from '@mantine/core'
+import { Card, Loader, SimpleGrid, Text, useMantineTheme } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
 
 export const Posts = (props) => {
   const theme = useMantineTheme();
+  // if (props.isLoading) {
+  //   return <Loader/>
+  // }
 
   const contents = () => {
     if (props.search) {
@@ -17,7 +20,7 @@ export const Posts = (props) => {
 
   return (
     <div>
-        <SimpleGrid cols={3}>
+        <SimpleGrid cols={3} sx={{padding: "2rem"}}>
             {contents().map((blog) => (
             <Link  key={blog.id}  href={`/blog/${blog.id}`}>
                     <Card

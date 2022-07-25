@@ -1,14 +1,7 @@
-import { useForm } from '@mantine/form';
-import {TextInput, Header, createStyles, Select, Card, SimpleGrid, Text, useMantineTheme, Title } from '@mantine/core';
 import { client } from '../libs/client';
 import { useState } from 'react';
 import { Heading } from '../components/Heading';
 import { Posts } from '../components/Posts';
-
-//後でtailwindcs
-
-
-
 
 export const getStaticProps = async () => {
   const bodyData = await client.get({
@@ -22,7 +15,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       bodies: bodyData.contents,
-      categories: categoryData.contents
+      categories: categoryData.contents,
     },
   };
 };
@@ -63,8 +56,9 @@ export const getStaticProps = async () => {
     <div>
 
 
-    <Heading categorySubmit={categorySubmit} handleSubmit={handleSubmit} categories={categories}></Heading>
-    <Posts bodies={bodies} select={select} search={search}></Posts>
+      <Heading categorySubmit={categorySubmit} handleSubmit={handleSubmit} categories={categories}></Heading>
+      <Posts bodies={bodies} select={select} search={search}></Posts>
+
 
       
       
