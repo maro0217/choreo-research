@@ -1,4 +1,4 @@
-import { Card, Loader, SimpleGrid, Text, useMantineTheme } from '@mantine/core'
+import { Badge, Card, HoverCard, SimpleGrid, Text, useMantineTheme } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
 
@@ -25,7 +25,10 @@ export const Posts = (props) => {
             <Link  key={blog.id}  href={`/blog/${blog.id}`}>
                     <Card
                     sx={{
-                        backgroundColor: theme.colors.blue[1]
+                        backgroundColor: theme.colors.blue[1],
+                        '&:hover': {
+                          cursor: 'pointer'
+                        }
                     }}
                     shadow="sm"
                     p="lg"
@@ -33,8 +36,8 @@ export const Posts = (props) => {
                       <Card.Section component="a" target="_blank">
 
                       </Card.Section>
-                      <Text  weight={800} >{blog.title}</Text>
-                      <a>{blog.category.name}</a>
+                        <Text  weight={800} >{blog.title}</Text>
+                      <Badge>{blog.category.name}</Badge>
                     </Card>
             </Link>
             ))}
