@@ -1,0 +1,18 @@
+module.exports = {
+    "env": {
+        "browser": true,
+        "es2021": true,
+    "extends": [
+        "next/core-web-vitals",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+
+    }
+}
