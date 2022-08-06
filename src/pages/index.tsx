@@ -1,7 +1,8 @@
-import { client } from "../libs/client";
-import { useState } from "react";
-import { Heading } from "../components/Heading";
-import { Posts } from "../components/Posts";
+import { client } from "src/libs/client";
+import { ChangeEventHandler, useState } from "react";
+import { Heading } from "src/components/Heading";
+import { Posts } from "src/components/Posts";
+import { NextPage } from "next";
 
 export const getStaticProps = async () => {
   const bodyData = await client.get({
@@ -19,15 +20,16 @@ export const getStaticProps = async () => {
     },
   };
 };
+type Props = {
+  bodies:{ [key: string]: unknown; name: string};
+  categories: string[];
+}
 
-export default function Home({ bodies, categories }) {
+const Home: NextPage<Props> = ({ bodies, categories }) => {
   const [search, setSearch] = useState();
   const [select, setSelect] = useState();
-  const handleSubmit = async (e) => {
-    console.log(e);
-    console.log(JSON.stringify(e));
+  const handleSubmit: ChangeEventHandler<HTMLInputElement> = async (e) => {
     const q = e.name;
-    console.log(q);
     const data = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -37,7 +39,7 @@ export default function Home({ bodies, categories }) {
     setSearch(json.contents);
   };
 
-  const categorySubmit = async (e) => {
+  const categorySubmit: ChangeEventHandler<HTMLInputElement> = async (e) => {
     console.log(e);
     const obj = categories.filter((data) => data.name === e);
     console.log(obj);
@@ -63,3 +65,5 @@ export default function Home({ bodies, categories }) {
     </div>
   );
 }
+
+export default Home;

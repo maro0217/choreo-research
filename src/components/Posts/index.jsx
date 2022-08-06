@@ -1,10 +1,4 @@
-import {
-  Badge,
-  Card,
-  SimpleGrid,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { Badge, Card, SimpleGrid, Text, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 

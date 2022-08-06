@@ -1,7 +1,8 @@
+import "src/libs/tailwind.css";
 import { MantineProvider } from "@mantine/core";
-import "../styles/globals.css";
+import { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <MantineProvider
@@ -10,10 +11,6 @@ function MyApp({ Component, pageProps }) {
         theme={{
           fontFamily:
             "Greycliff CF, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
-          colors: {
-            mantine:
-              "linear-gradient(52deg, rgb(51, 154, 240) 3%, rgb(59, 201, 219) 97%)",
-          },
         }}
       >
         <Component {...pageProps} />

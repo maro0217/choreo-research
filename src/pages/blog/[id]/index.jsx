@@ -1,5 +1,5 @@
-import Post from "../../../components/Post";
-import { client } from "../../../libs/client";
+import Post from "src/components/Post";
+import { client } from "src/libs/client";
 
 export const getStaticPaths = async () => {
   const data = await client.get({ endpoint: "blog" });
