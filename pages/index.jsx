@@ -24,10 +24,7 @@ export default function Home({ bodies, categories }) {
   const [search, setSearch] = useState();
   const [select, setSelect] = useState();
   const handleSubmit = async (e) => {
-    console.log(e);
-    console.log(JSON.stringify(e));
     const q = e.name;
-    console.log(q);
     const data = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -39,10 +36,8 @@ export default function Home({ bodies, categories }) {
 
   const categorySubmit = async (e) => {
     console.log(e);
-    const obj = categories.filter((data) => data.name === e);
-    console.log(obj);
+    const obj = categories.filter((data) => data.name === e.genre);
     const id = obj[0].id;
-    console.log(id);
     const data = await fetch("/api/category", {
       method: "POST",
       headers: { "Content-type": "application/json" },

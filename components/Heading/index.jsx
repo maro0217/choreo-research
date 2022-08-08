@@ -1,4 +1,5 @@
 import {
+  Button,
   createStyles,
   Header,
   TextInput,
@@ -29,9 +30,7 @@ const useStyles = createStyles((theme) => ({
     width: "35%",
   },
 
-  SelectBox: {
-    width: "30%",
-  },
+
 }));
 
 export const Heading = (props) => {
@@ -63,16 +62,18 @@ export const Heading = (props) => {
               icon={<Search size={18} />}
             />
           </form>
-          <form className={classes.SelectBox}>
-            <Select
-              data={genre}
-              searchable
-              placeholder="お探しのスタイルはどれですか？"
-              {...form.getInputProps("genre")}
-              onChange={(e) => form.onSubmit(props.categorySubmit(e))}
-            />
-          </form>
-        </div>
+            <form
+              className='w-4/5'
+              onSubmit={form.onSubmit(props.categorySubmit)}
+              >
+              <Select
+                data={genre}
+                placeholder="お探しのスタイルはどれですか？"
+                {...form.getInputProps("genre")}
+              />
+              <Button type="submit" variant="outline" radius="xl" size="xs" compact>Submit</Button>
+            </form>
+          </div>
       </Header>
     </div>
   );
