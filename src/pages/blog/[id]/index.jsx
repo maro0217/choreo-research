@@ -2,27 +2,27 @@ import Post from "src/components/Post";
 import { client } from "src/libs/client";
 
 export const getStaticPaths = async () => {
-  const data = await client.get({ endpoint: "blog" });
+  const data = await client.get({ endpoint: "articles" });
 
-  const paths = data.contents.map((content) => `/blog/${content.id}`);
+  const paths = data.contents.map((content) => `/articles/${content.id}`);
   return { paths, fallback: false };
 };
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const data = await client.get({ endpoint: "blog", contentId: id });
+  const data = await client.get({ endpoint: "articles", contentId: id });
 
   return {
     props: {
-      blog: data,
+      article: data,
     },
   };
 };
 
-export default function BlogId({ blog }) {
+export default function BlogId({ article }) {
   return (
     <div>
-      <Post blog={blog} />
+      <Post article={article} />
     </div>
   );
 }

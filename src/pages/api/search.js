@@ -4,7 +4,7 @@ const Search = async (req, res) => {
   console.log(req.body);
 
   const data = await client.get({
-    endpoint: "blog",
+    endpoint: "articles",
     queries: { q: `${req.body.q}` },
   });
 
