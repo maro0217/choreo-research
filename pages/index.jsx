@@ -1,11 +1,11 @@
-import { client } from "../libs/client";
+import { client } from "libs/client";
 import { useState } from "react";
-import { Heading } from "../components/Heading";
-import { Posts } from "../components/Posts";
+import { Heading } from "components/Heading";
+import { Posts } from "components/Posts";
 
 export const getStaticProps = async () => {
   const bodyData = await client.get({
-    endpoint: "blog",
+    endpoint: "articles",
   });
 
   const categoryData = await client.get({
