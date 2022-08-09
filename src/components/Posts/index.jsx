@@ -1,4 +1,4 @@
-import { Badge, Card, SimpleGrid, Text, useMantineTheme } from "@mantine/core";
+import { Badge, Card, Image, SimpleGrid, Text, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 
@@ -30,12 +30,34 @@ export const Posts = (props) => {
                   cursor: "pointer",
                 },
               }}
+              radius="md"
               shadow="sm"
               p="lg"
+              withBorder
             >
-              <Card.Section component="a" target="_blank"></Card.Section>
-              <Text weight={800}>{article.title}</Text>
-              <Badge>{article.category.name}</Badge>
+              <Card.Section>
+                <Image
+                  src={article.thumbnail.url}
+                  height={160}
+                  alt={article.caption}
+                />
+              </Card.Section>
+                <Text
+                   weight={500}
+                   mt="md"
+                >
+                  {article.title}
+                </Text>
+                <Badge 
+                  gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
+                  variant="light"
+                  mb="xs"
+                >
+                  {article.category.name}
+                </Badge>
+              <Text size="sm" color="dimmed">
+                {article.caption}
+              </Text>
             </Card>
           </Link>
         ))}
