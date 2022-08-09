@@ -1,12 +1,11 @@
 import { client } from "src/libs/client";
 import { Posts } from "src/components/Posts";
-import { NextPage } from "next";
-import Heading from "src/components/Heading";
+import { Heading } from "src/components/Heading";
 import { useState } from "react";
  
 export const getStaticProps = async () => {
   const bodyData = await client.get({
-    endpoint: "blog",
+    endpoint: "articles",
   });
 
   const categoryData = await client.get({
@@ -20,12 +19,9 @@ export const getStaticProps = async () => {
     },
   };
 };
-type Props = {
-  bodies:{ [key: string]: unknown; name: string};
-  categories: { name: string; id: string; }[]
-}
 
-const Home: NextPage<Props> = ({ bodies, categories }) => {
+
+const Home= ({ bodies, categories }) => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("");
 

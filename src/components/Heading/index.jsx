@@ -35,16 +35,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-type FormValues = {
-  name: string;
-  genre: String;
-}
 export const Heading = (props) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   const genre = props.categories.map((category) => category.name);
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     initialValues: {
       name: "",
       genre: "",
@@ -74,7 +70,6 @@ export const Heading = (props) => {
               searchable
               placeholder="お探しのスタイルはどれですか？"
               {...form.getInputProps("genre")}
-              onChange={(e) => form.onSubmit(props.categorySubmit(e))}
             />
           </form>
         </div>

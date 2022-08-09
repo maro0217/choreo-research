@@ -21,8 +21,8 @@ export const Posts = (props) => {
   return (
     <div>
       <SimpleGrid cols={3} sx={{ padding: "2rem" }}>
-        {contents().map((blog) => (
-          <Link key={blog.id} href={`/blog/${blog.id}`}>
+        {contents().map((article) => (
+          <Link key={article.id} href={`/articles/${article.id}`}>
             <Card
               sx={{
                 backgroundColor: theme.colors.blue[1],
@@ -34,8 +34,8 @@ export const Posts = (props) => {
               p="lg"
             >
               <Card.Section component="a" target="_blank"></Card.Section>
-              <Text weight={800}>{blog.title}</Text>
-              <Badge>{blog.category.name}</Badge>
+              <Text weight={800}>{article.title}</Text>
+              <Badge>{article.category.name}</Badge>
             </Card>
           </Link>
         ))}
