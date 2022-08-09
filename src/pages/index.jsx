@@ -20,7 +20,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Home({ bodies, categories }) {
+const Home = ({ bodies, categories }) => {
   const [search, setSearch] = useState();
   const [select, setSelect] = useState();
 
@@ -37,3 +37,5 @@ export default function Home({ bodies, categories }) {
     </div>
   );
 }
+
+export default Home;

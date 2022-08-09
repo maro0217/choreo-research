@@ -37,6 +37,7 @@ const useStyles = createStyles((theme) => ({
 
 }));
 
+
 export const Heading = (props) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
@@ -91,7 +92,7 @@ export const Heading = (props) => {
               icon={<Search size={18} />}
             />
           </form>
-            <form
+          <form
               onSubmit={form.onSubmit(categorySubmit)}
               className={classes.SelectBox}
               >
@@ -101,8 +102,8 @@ export const Heading = (props) => {
                 {...form.getInputProps("genre")}
               />
               <Button type="submit" variant="outline" radius="xl" size="xs" compact>Submit</Button>
-            </form>
-          </div>
+          </form>
+        </div>
       </Header>
     </div>
   );
