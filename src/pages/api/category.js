@@ -1,4 +1,4 @@
-import { client } from "libs/client";
+import { client } from "src/libs/client";
 
 const handler = async (req, res) => {
   console.log(req.body);

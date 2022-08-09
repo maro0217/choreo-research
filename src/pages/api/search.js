@@ -1,4 +1,4 @@
-import { client } from "libs/client";
+import { client } from "src/libs/client";
 
 const Search = async (req, res) => {
   console.log(req.body);

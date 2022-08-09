@@ -38,6 +38,31 @@ export const Heading = (props) => {
   const theme = useMantineTheme();
   const genre = props.categories.map((category) => category.name);
 
+  const handleSubmit = async (e) => {
+    const q = e.name;
+    const data = await fetch("/api/search", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ q }),
+    });
+    const json = await data.json();
+    props.setSearch(json.contents);
+  };
+
+  const categorySubmit = async (e) => {
+    console.log(e);
+    const obj = props.categories.filter((data) => data.name === e.genre);
+    const id = obj[0].id;
+    const data = await fetch("/api/category", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    const json = await data.json();
+    props.setSelect(json.contents);
+  };
+
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -53,7 +78,7 @@ export const Heading = (props) => {
             Cho<a style={{ color: theme.colors.blue[3] }}>reo</a> Search
           </Title>
           <form
-            onSubmit={form.onSubmit(props.handleSubmit)}
+            onSubmit={form.onSubmit(handleSubmit)}
             className={classes.SearchBox}
           >
             <TextInput
@@ -64,7 +89,7 @@ export const Heading = (props) => {
           </form>
             <form
               className='w-4/5'
-              onSubmit={form.onSubmit(props.categorySubmit)}
+              onSubmit={form.onSubmit(categorySubmit)}
               >
               <Select
                 data={genre}
