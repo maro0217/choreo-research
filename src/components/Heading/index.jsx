@@ -30,6 +30,10 @@ const useStyles = createStyles((theme) => ({
     width: "35%",
   },
 
+  SelectBox: {
+    width: "35%"
+  }
+
 
 }));
 
@@ -88,8 +92,8 @@ export const Heading = (props) => {
             />
           </form>
             <form
-              className='w-4/5'
               onSubmit={form.onSubmit(categorySubmit)}
+              className={classes.SelectBox}
               >
               <Select
                 data={genre}

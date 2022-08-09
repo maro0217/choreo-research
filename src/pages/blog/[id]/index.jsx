@@ -14,15 +14,15 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      blog: data,
+      article: data,
     },
   };
 };
 
-export default function BlogId({ blog }) {
+export default function BlogId({ article }) {
   return (
     <div>
-      <Post blog={blog} />
+      <Post article={article} />
     </div>
   );
 }
