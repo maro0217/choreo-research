@@ -48,6 +48,11 @@ export const Posts = (props) => {
                 >
                   {article.title}
                 </Text>
+                <Text
+                   size="sm"
+                >
+                  {article.choreographer}
+                </Text>
                 <Badge 
                   gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
                   variant="light"
