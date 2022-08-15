@@ -19,7 +19,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export default function PostsId({ article }) {
+export default function Article({ article }) {
   return (
     <div>
       <Post article={article} />

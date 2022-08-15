@@ -1,27 +1,33 @@
 import { Badge, Card, Image, SimpleGrid, Text, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
+import { useSearch } from "src/state/search";
+import { Article } from "src/types/article";
 
-export const Posts = (props) => {
+
+type Props = {
+  articles: Article[]
+}
+
+export const Posts: FC<Props> = (props) => {
   const theme = useMantineTheme();
-  // if (props.isLoading) {
-  //   return <Loader/>
-  // }
-
-  const contents = () => {
-    if (props.search) {
-      return props.search;
-    } else if (props.select) {
-      return props.select;
+  const { search, select } = useSearch();
+  console.log(search)
+  const contentsFilter = () => {
+    if (search.length !== 0) {
+      return search;
+    } else if (select.length !== 0) {
+      return select;
     } else {
-      return props.bodies;
+      return props.articles;
     }
   };
-
+  console.log(props.articles);
+  console.log(contentsFilter());
   return (
     <div>
       <SimpleGrid cols={3} sx={{ padding: "2rem" }}>
-        {contents().map((article) => (
+        {contentsFilter().map((article) => (
           <Link key={article.id} href={`/articles/${article.id}`}>
             <Card
               sx={{
