@@ -20,8 +20,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/index.jsx",
-    "src/components/Heading/index.jsx"
+    "src/pages/index.tsx",
+    "src/components/Heading/index.tsx"
   ],
   "exclude": ["node_modules"]
 }
