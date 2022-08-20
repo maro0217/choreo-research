@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "src/firebase";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
+import Link from "next/link";
 
 
 const Login: NextPage = () => {
@@ -24,7 +25,7 @@ const Login: NextPage = () => {
 
     return (
       <div>
-        <Group>
+        <Group position="center" sx={{ padding: '2rem' }}>
             <form onSubmit={handleSubmit}>
             <TextInput
                 placeholder="Your name"
@@ -50,6 +51,9 @@ const Login: NextPage = () => {
             </Button>
             </form>
         </Group>
+        <Link href={'/signup'}>
+            ユーザー登録はこちら
+        </Link>
 
       </div>
     );

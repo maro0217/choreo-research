@@ -2,6 +2,7 @@ import "src/libs/tailwind.css";
 import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import { SearchProvider } from "src/state/search";
+import { AuthProvider } from "src/AuthContext";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 
@@ -15,9 +16,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             "Greycliff CF, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
         }}
       >
-        <SearchProvider>
-            <Component {...pageProps} />
-        </SearchProvider>
+        <AuthProvider>
+          <SearchProvider>
+              <Component {...pageProps} />
+          </SearchProvider>
+        </AuthProvider>
       </MantineProvider>
     </>
   );

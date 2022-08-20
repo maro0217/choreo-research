@@ -4,6 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "src/firebase";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
+import Link from "next/link";
 
 
 const SignUp: NextPage = () => {
@@ -50,6 +51,9 @@ const SignUp: NextPage = () => {
             </Button>
             </form>
         </Group>
+        <Link href={'/login'}>
+            ログインはこちらから
+        </Link>
 
       </div>
     );

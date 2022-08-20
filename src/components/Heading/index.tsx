@@ -12,6 +12,9 @@ import { Select } from "@mantine/core";
 import { Search } from "tabler-icons-react";
 import { Category } from "src/types/category";
 import { useSearchDispatch } from "src/state/search";
+import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "src/firebase";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -44,12 +47,21 @@ type Props = {
   categories: Category[];
 }
 
+
 export const Heading: FC<Props> = (props) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   const genre = props.categories.map(category => category.name);
+  const router = useRouter()
+  const auth = getAuth(app)
   
   const { setSearch, setSelect } = useSearchDispatch();
+
+  const handleLogout = async () => {
+    await signOut(auth)
+    await router.push("/login")
+  }
+  
 
   const handleSubmit = async (e: Form) => {
     try {
@@ -122,7 +134,10 @@ export const Heading: FC<Props> = (props) => {
                 placeholder="お探しのスタイルはどれですか？"
                 {...form.getInputProps("genre")}
               />
-              <Button type="submit" variant="outline" radius="xl" size="xs" compact>Submit</Button>
+              <Button type="submit" variant="outline" radius="xl" size="xs" compact>カテゴリ検索</Button>
+          </form>
+          <form onSubmit={handleLogout}>
+            <Button type="submit" variant="outline" radius="xl" size="xs" compact>ログアウト</Button>
           </form>
         </div>
       </Header>
