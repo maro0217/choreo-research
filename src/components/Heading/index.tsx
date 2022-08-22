@@ -1,6 +1,6 @@
 import {
+  Avatar,
   Button,
-  createStyles,
   Header,
   TextInput,
   Title,
@@ -15,36 +15,14 @@ import { useSearchDispatch } from "src/state/search";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "src/firebase";
-
-const useStyles = createStyles((theme) => ({
-  header: {
-    paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
-    width: "100%",
-  },
-
-  headerInner: {
-    height: 70,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-  },
-
-  SearchBox: {
-    width: "35%",
-  },
-
-  SelectBox: {
-    width: "35%"
-  }
-
-
-}));
+import Link from "next/link";
+import { useAuthContext, UserType } from "src/AuthContext";
+import useStyles from 'src/styles/useStyles'
 
 
 type Props = {
   categories: Category[];
+  user: UserType
 }
 
 
@@ -54,8 +32,10 @@ export const Heading: FC<Props> = (props) => {
   const genre = props.categories.map(category => category.name);
   const router = useRouter()
   const auth = getAuth(app)
+  const { user } = useAuthContext();
   
   const { setSearch, setSelect } = useSearchDispatch();
+
 
   const handleLogout = async () => {
     await signOut(auth)
@@ -136,6 +116,7 @@ export const Heading: FC<Props> = (props) => {
               />
               <Button type="submit" variant="outline" radius="xl" size="xs" compact>カテゴリ検索</Button>
           </form>
+          <Avatar component={Link} href={`/profile/${user?.uid}`} size={15}/>
           <form onSubmit={handleLogout}>
             <Button type="submit" variant="outline" radius="xl" size="xs" compact>ログアウト</Button>
           </form>

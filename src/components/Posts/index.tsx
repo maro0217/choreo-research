@@ -12,7 +12,6 @@ type Props = {
 export const Posts: FC<Props> = (props) => {
   const theme = useMantineTheme();
   const { search, select } = useSearch();
-  console.log(search)
   const contentsFilter = () => {
     if (search.length !== 0) {
       return search;
@@ -22,8 +21,6 @@ export const Posts: FC<Props> = (props) => {
       return props.articles;
     }
   };
-  console.log(props.articles);
-  console.log(contentsFilter());
   return (
     <div>
       <SimpleGrid cols={3} sx={{ padding: "2rem" }}>
