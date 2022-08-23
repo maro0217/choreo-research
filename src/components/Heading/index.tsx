@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Header,
   TextInput,
@@ -12,35 +11,24 @@ import { Select } from "@mantine/core";
 import { Search } from "tabler-icons-react";
 import { Category } from "src/types/category";
 import { useSearchDispatch } from "src/state/search";
-import { useRouter } from "next/router";
-import { getAuth, signOut } from "firebase/auth";
-import { app } from "src/firebase";
-import Link from "next/link";
-import { useAuthContext, UserType } from "src/AuthContext";
 import useStyles from 'src/styles/useStyles'
+import { UserMenu } from "../UserMenu/UserMenu";
 
 
 type Props = {
   categories: Category[];
-  user: UserType
 }
 
 
-export const Heading: FC<Props> = (props) => {
+export const Heading: FC<Props> = (props: Props) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
   const genre = props.categories.map(category => category.name);
-  const router = useRouter()
-  const auth = getAuth(app)
-  const { user } = useAuthContext();
   
   const { setSearch, setSelect } = useSearchDispatch();
 
 
-  const handleLogout = async () => {
-    await signOut(auth)
-    await router.push("/login")
-  }
+
   
 
   const handleSubmit = async (e: Form) => {
@@ -116,10 +104,7 @@ export const Heading: FC<Props> = (props) => {
               />
               <Button type="submit" variant="outline" radius="xl" size="xs" compact>カテゴリ検索</Button>
           </form>
-          <Avatar component={Link} href={`/profile/${user?.uid}`} size={15}/>
-          <form onSubmit={handleLogout}>
-            <Button type="submit" variant="outline" radius="xl" size="xs" compact>ログアウト</Button>
-          </form>
+          <UserMenu/>
         </div>
       </Header>
     </div>
