@@ -11,8 +11,7 @@ export const UserMenu = () => {
 
   const router = useRouter()
   const auth = getAuth(app)
-  const handleLogout = async (e) => {
-    e.preventDefault();
+  const handleLogout = async () => {
     try {
       console.log('ログアウトします');
       await signOut(auth)
