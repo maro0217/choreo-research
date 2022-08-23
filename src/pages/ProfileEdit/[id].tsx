@@ -1,9 +1,8 @@
 import { Button, Group, MultiSelect, Select, TextInput } from "@mantine/core";
-import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useAuthContext } from "src/AuthContext";
-import { db } from "src/firebase";
+import { addUser, UserObj } from "src/utils/firestore";
 
 
 const prefecture = ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県",
@@ -15,36 +14,21 @@ const prefecture = ["北海道","青森県","岩手県","宮城県","秋田県",
 "熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
 
 const ProfileEdit = () => {
-    type String = string | null;
-    type Array = string[] | undefined;
-    const [name, setName] = useState<String>('');
-    const [type, setType] = useState<String>('');
-    const [style, setStyle] = useState<Array>([]);
-    const [like, setLike] = useState<Array>([]);
-    const [place, setPlace] = useState<String>('');
+    const [userobj, setUserObj] = useState<UserObj>({
+        id: '',
+        name: '',
+        type: '',
+        style: [],
+        place: '',
+    });
     const { user } = useAuthContext();
     const router = useRouter();
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            console.log(e.currentTarget.value);
-            console.log(name);
-            if (type === 'Dancer') {
-                await setDoc(doc(db, "users", user?.uid), {
-                        name: name,
-                        type: type,
-                        style: style,
-                        place: place
-                    })
-            } else {
-                await setDoc(doc(db, "users", user?.uid), {
-                    name: name,
-                    type: type,
-                    like: like,
-                    place: place
-                })
-            }
+            addUser(userobj);
+
         } catch (error) {
             console.log(error);
         }
@@ -58,35 +42,25 @@ const ProfileEdit = () => {
                     <TextInput
                         placeholder="Your name"
                         label="name"
-                        onChange={(e) => setName(e.currentTarget.value)}
+                        onChange={(e) => setUserObj(prev => ({...prev, name: e.currentTarget.value}))}
                     />
                     <Select
                         data={['Dancer', 'Audience']}
                         placeholder="Your type"
                         label="type"
-                        onChange={(value) => setType(value)}
+                        onChange={(value) => setUserObj(prev => ({...prev, type: value}))}
                     />
-                    {type === 'Dancer'?
                     <MultiSelect
                         data={['HIPHOP', 'Urban Choreography', 'JAZZ', 'LOCK']}
                         placeholder="Your Style"
                         label="style"
-                        value={style}
-                        onChange={setStyle}
-                    /> : 
-                    <MultiSelect
-                        data={['HIPHOP', 'Urban Choreography', 'JAZZ', 'LOCK']}
-                        placeholder="Your Like"
-                        label="like"
-                        value={like}
-                        onChange={setLike}
+                        onChange={(value) => setUserObj(prev => ({...prev, style: value}))}
                     />
-                    }
                     <Select
                         data={prefecture}
                         placeholder="Your Place"
                         label="place"
-                        onChange={(value) => setPlace(value)}
+                        onChange={(value) => setUserObj(prev => ({...prev, place: value}))}
                     />
                     <Button type="submit">Submit</Button>
                 </form>
