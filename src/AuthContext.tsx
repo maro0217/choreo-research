@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState, createContext, FC } from "react";
 import { app, db } from "./firebase";
 
-export type UserType = User | null;
+export type UserAuth = User | null;
 
 type AuthContextProps = {
-    user: UserType
+    user: UserAuth
   }
 
 const AuthContext = createContext<Partial<AuthContextProps>>({})
@@ -16,7 +16,7 @@ const AuthContext = createContext<Partial<AuthContextProps>>({})
 export const AuthProvider: FC<{ children : ReactNode }> = ({ children }) => {
     const router = useRouter();
     const auth = getAuth(app);
-    const [user, setUser] = useState<UserType>()
+    const [user, setUser] = useState<UserAuth>()
     const routing = 
         router.pathname === '/login' ||
         router.pathname === 'signup'
