@@ -13,7 +13,7 @@ type AuthContextProps = {
 const AuthContext = createContext<Partial<AuthContextProps>>({})
 
 
-export const AuthProvider: FC<{ children : ReactNode}> = ({ children }) => {
+export const AuthProvider: FC<{ children : ReactNode }> = ({ children }) => {
     const router = useRouter();
     const auth = getAuth(app);
     const [user, setUser] = useState<UserType>()
@@ -42,7 +42,7 @@ export const AuthProvider: FC<{ children : ReactNode}> = ({ children }) => {
 
         return authStateChanged();
             
-      }, [])
+      })}, [])
       
       return (
         <AuthContext.Provider value={{user}}>
