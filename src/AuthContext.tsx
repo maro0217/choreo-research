@@ -1,34 +1,28 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import {doc, getDoc, setDoc } from "firebase/firestore";
+import {collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { ReactNode, useContext, useEffect, useState, createContext } from "react";
+import { ReactNode, useContext, useEffect, useState, createContext, FC } from "react";
 import { app, db } from "./firebase";
 
 export type UserType = User | null;
-export type AuthContextProps = {
+
+type AuthContextProps = {
     user: UserType
   }
-export type AuthProps = {
-    children: ReactNode
-  }
-
 
 const AuthContext = createContext<Partial<AuthContextProps>>({})
 
-export const useAuthContext = () => {
-  return useContext(AuthContext)
-}
 
-export const AuthProvider = ({ children }: AuthProps) => {
+export const AuthProvider: FC<{ children : ReactNode}> = ({ children }) => {
     const router = useRouter();
     const auth = getAuth(app);
-    const [user, setUser] = useState<UserType>(null)
+    const [user, setUser] = useState<UserType>()
     const routing = 
         router.pathname === '/login' ||
         router.pathname === 'signup'
-    const value = {
-        user,
-    }
+    // const value = {
+    //     user,
+    // }
 
     useEffect(() => {
         const authStateChanged = onAuthStateChanged(auth, async(user) => {
@@ -45,14 +39,18 @@ export const AuthProvider = ({ children }: AuthProps) => {
                 })
               }
             }
-        });
+
         return authStateChanged();
             
-    }, [])
-
-    return (
-        <AuthContext.Provider value={value}>
+      }, [])
+      
+      return (
+        <AuthContext.Provider value={{user}}>
           {children}
         </AuthContext.Provider>
       )
-};
+    };
+    
+export const useAuthContext = () => {
+  return useContext(AuthContext)
+}
