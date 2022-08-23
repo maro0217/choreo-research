@@ -11,10 +11,15 @@ export const UserMenu = () => {
 
   const router = useRouter()
   const auth = getAuth(app)
-  const handleLogout = async () => {
-    console.log('ログアウトします');
-    await signOut(auth)
-    await router.push("/login")
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('ログアウトします');
+      await signOut(auth)
+      await router.push("/login")
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -29,9 +34,7 @@ export const UserMenu = () => {
           <Menu.Item component={NextLink} href={`/ProfileEdit/${user?.uid}`} icon={<Feather size={14} />}>Edit User</Menu.Item>
 
         <Menu.Label>Danger zone</Menu.Label>
-          <form onSubmit={handleLogout}>
-              <Menu.Item type='submit' icon={<LogOut size={14} />}>LogOut</Menu.Item>
-          </form>
+              <Menu.Item onClick={handleLogout} icon={<LogOut size={14} />}>LogOut</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import {collection, doc, getDoc, setDoc } from "firebase/firestore";
+import {doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState, createContext, FC } from "react";
 import { app, db } from "./firebase";
