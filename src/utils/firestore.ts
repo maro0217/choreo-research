@@ -1,4 +1,7 @@
-import { collection, doc, DocumentData, FirestoreDataConverter, getDocs, getFirestore, QueryDocumentSnapshot, setDoc, SnapshotOptions } from "firebase/firestore"
+import { collection, doc, DocumentData, FirestoreDataConverter, FirestoreError, getDocs, getFirestore, QueryDocumentSnapshot, setDoc, SnapshotOptions } from "firebase/firestore"
+import { db } from "src/firebase"
+import { useCollection, useDocument, useDocumentData } from "react-firebase-hooks/firestore"
+import { useState } from "react"
 
 export type UserObj = {
     id: string
@@ -15,7 +18,7 @@ export type UserObj = {
 /**
  * Firestore のドキュメントと Book オブジェクトの型変換を行います。
  */
- const userConverter: FirestoreDataConverter<UserObj> = {
+ export const userConverter: FirestoreDataConverter<UserObj> = {
     /**
      * Book オブジェクトを Firestore ドキュメントデータへ変換します。
      */
@@ -61,17 +64,22 @@ export async function addUser(user: UserObj) {
     return snapshot.docs.map((doc) => doc.data())
   }
 
-//   const db = getFirestore()
-//   const getAllDocsIds = async (url) => {
-//       const collRef = collection(db, '/users')
-//     const alldocs = await getDocs(collRef)
-//     return alldocs
-//   }
+  export const useGetUser = (url: string) => {
 
-//   const getFirebaseContent = async (id) => {
-//     const docRef = doc(db, '/users', id)
+      const docRef = doc(db, url, id)
+      const  [value, loading, error] = useDocument(docRef)
+      console.log(value?.data());
+      // 配列を返す
+      return {
+        data: value?.data(),
+        loading,
+        error
+      }
+  }
 
-//     const contents = await getDocs(docRef)
-//     return contents
-//   }
+  // export const getUserContents = async (id) => {
+  //   const docRef = doc(db, '/users', id)
+  //   const contents = await getDocs(docRef)
+  //   return contents
+  // }
 
