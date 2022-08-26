@@ -14,14 +14,14 @@ const prefecture = ["北海道","青森県","岩手県","宮城県","秋田県",
 "熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
 
 const ProfileEdit = () => {
+    const { user } = useAuthContext();
     const [userobj, setUserObj] = useState<UserObj>({
-        id: '',
+        id: user?.uid,
         name: '',
         type: '',
         style: [],
         place: '',
     });
-    const { user } = useAuthContext();
     const router = useRouter();
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

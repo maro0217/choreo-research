@@ -1,16 +1,15 @@
 import { Menu, Avatar, } from '@mantine/core';
 import { NextLink } from '@mantine/next';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { Feather, LogOut, User } from 'react-feather';
 import { useAuthContext } from 'src/AuthContext';
-import { app } from 'src/firebase';
+import { auth } from 'src/firebase';
 
 export const UserMenu = () => {
   const { user } = useAuthContext();
 
   const router = useRouter()
-  const auth = getAuth(app)
   const handleLogout = async () => {
     try {
       console.log('ログアウトします');

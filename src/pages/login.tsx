@@ -1,7 +1,7 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { FormEvent, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "src/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "src/firebase";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
 import Link from "next/link";
@@ -11,7 +11,6 @@ const Login: NextPage = () => {
     const router = useRouter()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth(app);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
